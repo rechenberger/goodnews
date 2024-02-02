@@ -12,6 +12,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment } from 'react'
 
+export { revalidate } from '@/server/revalidate'
+
 export default async function Page() {
   const feed = await fetchGoodNews({
     url: process.env.DEFAULT_RSS_FEED_URL!,
