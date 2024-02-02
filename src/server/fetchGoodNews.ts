@@ -9,8 +9,18 @@ const GoodNewsItem = z.object({
 })
 
 export const fetchGoodNews = async ({ url }: { url: string }) => {
-  const items = await fetchFeedWithContent({ url })
-  const itemsModified = await Promise.all(
+  let items = await fetchFeedWithContent({ url })
+
+  // Filter Forbidden Phrases to not hit content filter of AI:
+  const forbiddenPhrases = process.env.FORBIDDEN_PHRASES!.split(',')
+  items = items.filter(
+    (item) =>
+      ![item.title, item.contentSnippet, item.content].some((field) =>
+        forbiddenPhrases.some((phrase) => field.includes(phrase)),
+      ),
+  )
+
+  const itemsModified = await Promise.allSettled(
     items.map(async (item) => {
       const input = GoodNewsItem.parse(item)
       const answer = await fetchTeampilotData({
@@ -28,5 +38,7 @@ export const fetchGoodNews = async ({ url }: { url: string }) => {
       }
     }),
   )
-  return itemsModified
+  return itemsModified.flatMap((item) =>
+    item.status === 'fulfilled' ? [item.value] : [],
+  )
 }

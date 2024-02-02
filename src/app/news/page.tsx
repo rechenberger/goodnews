@@ -16,7 +16,7 @@ export default async function Page() {
   })
   return (
     <>
-      <h1>News</h1>
+      {/* <h1>News</h1> */}
       <div className="grid grid-cols-3 gap-4">
         {feed.map((item) => {
           return (
@@ -40,14 +40,13 @@ export default async function Page() {
                   <p>
                     <strong>{item.contentSnippet}</strong>
                   </p>
-                  <p className="mt-4 whitespace-pre-wrap">{item.content}</p>
+                  {/* <p className="mt-4 whitespace-pre-wrap">{item.content}</p> */}
                 </CardContent>
               </Card>
             </Fragment>
           )
         })}
       </div>
-      <pre className="overflow-x-auto">{JSON.stringify(feed, null, 2)}</pre>
     </>
   )
 }

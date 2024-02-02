@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio'
-import { take } from 'lodash-es'
+import { dropRight } from 'lodash-es'
 import Parser from 'rss-parser'
 import { z } from 'zod'
 
@@ -37,17 +37,22 @@ export const fetchFeedItems = async ({ url }: { url: string }) => {
 
 export const fetchFeedWithContent = async ({ url }: { url: string }) => {
   let items = await fetchFeedItems({ url })
-  items = take(items, 3)
+  items = dropRight(items, 6) // Last 6 items are not normal articles // TODO: find a better way to filter these out
   const itemsWithContent = await Promise.all(
     items.map(async (item) => {
-      const content = await fetchContent({ url: item.link })
-      return {
-        ...item,
-        content,
+      try {
+        const content = await fetchContent({ url: item.link })
+        return {
+          ...item,
+          content,
+        }
+      } catch (error) {
+        console.error(error)
+        return null
       }
     }),
   )
-  return itemsWithContent
+  return itemsWithContent.flatMap((item) => (item ? [item] : []))
 }
 
 const fetchContent = async ({ url }: { url: string }) => {
