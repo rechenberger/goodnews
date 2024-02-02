@@ -6,12 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { fetchFeedItems } from '@/server/fetchFeedItems'
+import { fetchFeedWithContent } from '@/server/fetchFeedItems'
 import Image from 'next/image'
 import { Fragment } from 'react'
 
 export default async function Page() {
-  const feed = await fetchFeedItems({
+  const feed = await fetchFeedWithContent({
     url: process.env.DEFAULT_RSS_FEED_URL!,
   })
   return (
