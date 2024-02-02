@@ -6,12 +6,21 @@ const NewsFeedItem = z.object({
   title: z.string(),
   link: z.string(),
   content: z.string(),
+  // contentSnippet: z.string(),
+  'content:encoded': z.string(),
   isoDate: z.string(),
 })
 
 const fetchFeedItems = async ({ url }: { url: string }) => {
   const feed = await parser.parseURL(url)
-  const items = z.array(NewsFeedItem).parse(feed.items)
+  const items = feed.items.flatMap((item) => {
+    const parsed = NewsFeedItem.safeParse(item)
+    if (parsed.success) {
+      return [parsed.data]
+    }
+    // console.warn('Failed to parse feed item', item, parsed.error.message)
+    return []
+  })
   return items
 }
 
