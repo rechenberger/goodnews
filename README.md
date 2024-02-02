@@ -1,27 +1,13 @@
-## Teampilot Starter
+## Was ist GoodNews?
 
-```bash
-pnpm install
-pnpm dev
-```
+by [Teampilot AI](https://teampilot.ai)
 
-## Libraries
+GoodNews ist eine technische Demo, die Inhalte von tagesschau.de mittels Künstlicher Intelligenz (KI) positiv umschreibt. Bitte beachten Sie, dass es sich hierbei nicht um echte Nachrichten handelt. Wir haben keine Redaktion, und es besteht kein Anspruch auf Richtigkeit oder journalistische Sorgfalt der präsentierten Inhalte.
 
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [pnpm](https://pnpm.io/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [@teampilot/sdk](https://sdk.teampilot.ai/)
+GoodNews ist Ihr experimenteller Ort für Positivität. In dieser technischen Demo verwenden wir fortschrittliche Algorithmen, um Nachrichtenartikel in eine hoffnungsvollere Sprache zu transformieren. Unser Ziel ist es, einen heiteren Kontrapunkt zum oft schweren Ton der aktuellen Nachrichtenlandschaft zu setzen.
 
-## Setup Teampilot SDK
+Wir möchten darauf hinweisen, dass die umgeschriebenen Artikel nicht die Realität abbilden und lediglich als kreative Ausdrucksform der KI zu verstehen sind. GoodNews soll als Anregung dienen, die Präsentation und Wirkung von Nachrichten zu reflektieren und die Bedeutung einer ausgewogenen Medienlandschaft zu diskutieren.
 
-1. Create a Teampilot account (at [https://teampilot.ai/](https://teampilot.ai/)) if you don't have one already
-2. Create a Teampilot team if you don't have one already
-3. Click the top left menu and select "Launchpads"
-4. Create a new Launchpad - From there you can configure the Launchpad to your needs (Not needed to get started)
-5. Activate the "Public" switch
-6. Click on "Save" at the bottom right of the page
-7. Create a `.env.local` file in the root of the project
-8. Copy the "ID" that is now visible under "Public", and paste it into the `TEAMPILOT_DEFAULT_LAUNCHPAD_SLUG_ID` variable in the `.env.local` file
+Diese Plattform ist als spielerische Anwendung gedacht und soll Nutzern aufzeigen, wie KI Texte manipulieren kann. Wir ermutigen Sie, stets eine kritische Perspektive einzunehmen und sich für eine umfassende Sichtweise von vertrauenswürdigen Nachrichtenquellen zu informieren.
 
-And thats it - you are now ready to use the Teampilot SDK in your project.
+Genießen Sie die positiven Spin-offs der aktuellen Nachrichten und betrachten Sie GoodNews als eine Einladung, die Welt einmal durch eine optimistischere Brille zu sehen – aber stets mit einem Bewusstsein für die Bedeutung von Fakten und differenzierter Berichterstattung.

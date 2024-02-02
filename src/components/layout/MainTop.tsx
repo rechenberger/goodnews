@@ -19,10 +19,7 @@ export const MainTop = () => {
           <MainTopNav />
         </div>
         <div className="flex flex-row">
-          <Link
-            href="https://github.com/SODEFA-GmbH-Co-KG/teampilot-starter"
-            target="_blank"
-          >
+          <Link href="https://github.com/rechenberger/goodnews" target="_blank">
             <Button variant={'ghost'} size="icon">
               <Github />
             </Button>

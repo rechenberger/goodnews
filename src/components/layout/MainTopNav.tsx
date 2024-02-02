@@ -1,50 +1,31 @@
-'use client'
-
 import { cn } from '@/lib/utils'
 import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
-const entries = [
-  {
-    name: 'News',
-    href: '/',
-  },
-]
 
 export function MainTopNav({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
-  const pathname = usePathname()
-
   return (
     <nav
       className={cn(
-        'flex flex-1 flex-wrap items-center gap-4 lg:gap-6',
+        'flex flex-1 flex-wrap items-center justify-center gap-4 lg:gap-6',
         className,
       )}
       {...props}
     >
-      {entries.map((entry) => {
-        const isActive =
-          entry.href === '/'
-            ? pathname === entry.href
-            : pathname?.startsWith(entry.href)
-        return (
-          <Link
-            key={entry.href}
-            href={entry.href}
-            className={cn(
-              'text-sm font-medium transition-colors hover:text-primary',
-              !isActive && 'text-muted-foreground',
-            )}
-          >
-            {entry.name}
-          </Link>
-        )
-      })}
-      <div className="flex-1" />
+      <Link
+        href={'/about'}
+        className={cn(
+          'text-sm font-medium transition-colors hover:text-primary',
+          'text-muted-foreground',
+          'tracking-wide',
+          'flex flex-row items-center gap-1',
+          'border rounded-md px-2 py-1',
+        )}
+      >
+        <div>Was ist GoodNews?</div>
+      </Link>
       <Link
         href={'https://teampilot.ai'}
         target="_blank"
@@ -54,7 +35,7 @@ export function MainTopNav({
           'flex flex-row items-center gap-1',
         )}
       >
-        <div>Teampilot AI</div>
+        <div>by Teampilot AI</div>
         <ExternalLink className="h-3 w-3" />
       </Link>
     </nav>

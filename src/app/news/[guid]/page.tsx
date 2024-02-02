@@ -32,7 +32,11 @@ export default async function Page({ params }: { params: { guid: string } }) {
       </article>
       <div>
         Original:{' '}
-        <Link href={item.link} className="text-blue-400 hover:underline">
+        <Link
+          href={item.link}
+          target="_blank"
+          className="text-blue-400 hover:underline"
+        >
           {item.link}
         </Link>
       </div>
