@@ -31,11 +31,11 @@ export default async function Page() {
                   className={cn(
                     'overflow-hidden',
                     'flex flex-col',
-                    !isBig && 'md:flex-row',
+                    !isBig && 'lg:flex-row',
                   )}
                 >
                   <div
-                    className={cn('aspect-video relative', !isBig && 'md:h-60')}
+                    className={cn('aspect-video relative', !isBig && 'lg:h-60')}
                   >
                     <Image
                       src={item.imgUrl}
