@@ -40,7 +40,7 @@ export default async function Page() {
                   <p>
                     <strong>{item.contentSnippet}</strong>
                   </p>
-                  <p className="whitespace-pre-wrap">{item.content}</p>
+                  <p className="mt-4 whitespace-pre-wrap">{item.content}</p>
                 </CardContent>
               </Card>
             </Fragment>
