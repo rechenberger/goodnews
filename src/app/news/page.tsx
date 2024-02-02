@@ -1,5 +1,7 @@
+import * as cheerio from 'cheerio'
 import Parser from 'rss-parser'
 import { z } from 'zod'
+
 const parser: Parser = new Parser({})
 
 const NewsFeedItem = z.object({
@@ -16,7 +18,13 @@ const fetchFeedItems = async ({ url }: { url: string }) => {
   const items = feed.items.flatMap((item) => {
     const parsed = NewsFeedItem.safeParse(item)
     if (parsed.success) {
-      return [parsed.data]
+      const contentEncoded = cheerio.load(parsed.data['content:encoded'])
+      const imgUrl = contentEncoded('img').attr('src')
+      const result = {
+        ...parsed.data,
+        imgUrl,
+      }
+      return [result]
     }
     // console.warn('Failed to parse feed item', item, parsed.error.message)
     return []
