@@ -1,4 +1,4 @@
-## Was ist GoodNews?
+## Was ist [GoodNews](https://goodnews.teampilot.ai/)?
 
 by [Teampilot AI](https://teampilot.ai)
 
