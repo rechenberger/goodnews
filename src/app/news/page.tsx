@@ -1,10 +1,21 @@
+import { LocalDateTime } from '@/components/demo/LocalDateTime'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import * as cheerio from 'cheerio'
+import Image from 'next/image'
+import { Fragment } from 'react'
 import Parser from 'rss-parser'
 import { z } from 'zod'
 
 const parser: Parser = new Parser({})
 
 const NewsFeedItem = z.object({
+  guid: z.string(),
   title: z.string(),
   link: z.string(),
   content: z.string(),
@@ -20,6 +31,7 @@ const fetchFeedItems = async ({ url }: { url: string }) => {
     if (parsed.success) {
       const contentEncoded = cheerio.load(parsed.data['content:encoded'])
       const imgUrl = contentEncoded('img').attr('src')
+      if (!imgUrl) return []
       const result = {
         ...parsed.data,
         imgUrl,
@@ -39,6 +51,38 @@ export default async function Page() {
   return (
     <>
       <h1>News</h1>
+      <div className="grid grid-cols-3 gap-4">
+        {feed.map((item) => {
+          return (
+            <Fragment key={item.guid}>
+              <Card>
+                <Image
+                  src={item.imgUrl}
+                  alt={item.title}
+                  unoptimized
+                  width={360}
+                  height={360}
+                  className="w-full"
+                />
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                  <CardDescription>
+                    <LocalDateTime datetime={item.isoDate} />
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <>{item.content}</>
+                </CardContent>
+              </Card>
+            </Fragment>
+          )
+        })}
+        <Card>
+          <CardHeader>
+            <CardTitle></CardTitle>
+          </CardHeader>
+        </Card>
+      </div>
       <pre className="overflow-x-auto">{JSON.stringify(feed, null, 2)}</pre>
     </>
   )
