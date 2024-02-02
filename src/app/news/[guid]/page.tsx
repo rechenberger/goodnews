@@ -62,7 +62,7 @@ export default async function Page({ params }: PageProps) {
           target="_blank"
           className="text-blue-400 hover:underline"
         >
-          {item.link}
+          {new URL(item.link).hostname}
         </Link>
       </div>
     </>
