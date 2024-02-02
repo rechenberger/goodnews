@@ -15,11 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-background min-h-[100svh] flex flex-col">
+      <body className="bg-background min-h-[100svh] flex flex-col ">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <MainTop />
           <hr />
-          <div className="container flex flex-col gap-8 py-8 flex-1">
+          <div className="container xl:max-w-[1024px] 2xl:max-w-[1024px] flex flex-col gap-8 py-8 flex-1">
             {children}
           </div>
         </ThemeProvider>

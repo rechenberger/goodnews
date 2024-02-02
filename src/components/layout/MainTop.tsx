@@ -7,7 +7,7 @@ import { MainTopNav } from './MainTopNav'
 export const MainTop = () => {
   return (
     <>
-      <div className="container flex flex-row items-center justify-between gap-6 py-6">
+      <div className="container xl:max-w-[1024px] 2xl:max-w-[1024px] flex flex-row items-center justify-between gap-6 py-6">
         <Link href="/" className="flex flex-row items-center gap-3">
           <div className="text-xl">
             <strong>

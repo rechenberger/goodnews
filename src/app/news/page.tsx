@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card'
 import { fetchGoodNews } from '@/server/fetchGoodNews'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Fragment } from 'react'
 
 export default async function Page() {
@@ -21,28 +22,30 @@ export default async function Page() {
         {feed.map((item) => {
           return (
             <Fragment key={item.guid}>
-              <Card className="overflow-hidden">
-                <Image
-                  src={item.imgUrl}
-                  alt={item.title}
-                  unoptimized
-                  width={360}
-                  height={360}
-                  className="w-full "
-                />
-                <CardHeader>
-                  <CardTitle>{item.title}</CardTitle>
-                  <CardDescription>
-                    <LocalDateTime datetime={item.isoDate} />
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    <strong>{item.contentSnippet}</strong>
-                  </p>
-                  {/* <p className="mt-4 whitespace-pre-wrap">{item.content}</p> */}
-                </CardContent>
-              </Card>
+              <Link href={`/news/${item.guid}`}>
+                <Card className="overflow-hidden">
+                  <Image
+                    src={item.imgUrl}
+                    alt={item.title}
+                    unoptimized
+                    width={360}
+                    height={360}
+                    className="w-full "
+                  />
+                  <CardHeader>
+                    <CardTitle>{item.title}</CardTitle>
+                    <CardDescription>
+                      <LocalDateTime datetime={item.isoDate} />
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>
+                      <strong>{item.contentSnippet}</strong>
+                    </p>
+                    {/* <p className="mt-4 whitespace-pre-wrap">{item.content}</p> */}
+                  </CardContent>
+                </Card>
+              </Link>
             </Fragment>
           )
         })}
