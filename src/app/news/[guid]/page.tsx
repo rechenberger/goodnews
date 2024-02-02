@@ -1,14 +1,39 @@
 import { LocalDateTime } from '@/components/demo/LocalDateTime'
 import { fetchGoodNews } from '@/server/fetchGoodNews'
+import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-export default async function Page({ params }: { params: { guid: string } }) {
+type PageProps = { params: { guid: string } }
+
+export const generateMetadata = async (
+  { params }: PageProps,
+  parent: ResolvingMetadata,
+): Promise<Metadata> => {
+  const item = await fetchItem({ guid: params.guid })
+  if (!item) return notFound()
+  return {
+    title: item.title,
+    description: item.contentSnippet,
+    openGraph: {
+      type: 'article',
+      images: [{ url: item.imgUrl }],
+      title: item.title,
+      description: item.contentSnippet,
+    },
+  }
+}
+
+const fetchItem = async ({ guid }: { guid: string }) => {
   const feed = await fetchGoodNews({
     url: process.env.DEFAULT_RSS_FEED_URL!,
   })
-  const item = feed.find((item) => item.guid === params.guid)
+  return feed.find((item) => item.guid === guid)
+}
+
+export default async function Page({ params }: PageProps) {
+  const item = await fetchItem({ guid: params.guid })
   if (!item) return notFound()
   return (
     <>
