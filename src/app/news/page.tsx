@@ -55,14 +55,14 @@ export default async function Page() {
         {feed.map((item) => {
           return (
             <Fragment key={item.guid}>
-              <Card>
+              <Card className="overflow-hidden">
                 <Image
                   src={item.imgUrl}
                   alt={item.title}
                   unoptimized
                   width={360}
                   height={360}
-                  className="w-full"
+                  className="w-full "
                 />
                 <CardHeader>
                   <CardTitle>{item.title}</CardTitle>
