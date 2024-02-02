@@ -7,12 +7,8 @@ import { usePathname } from 'next/navigation'
 
 const entries = [
   {
-    name: 'Home',
-    href: '/',
-  },
-  {
     name: 'News',
-    href: '/news',
+    href: '/',
   },
 ]
 
