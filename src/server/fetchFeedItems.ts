@@ -10,7 +10,7 @@ const NewsFeedItem = z.object({
   title: z.string(),
   link: z.string(),
   content: z.string(),
-  // contentSnippet: z.string(),
+  contentSnippet: z.string(),
   'content:encoded': z.string(),
   isoDate: z.string(),
 })
@@ -62,7 +62,15 @@ const fetchContent = async ({ url }: { url: string }) => {
   let text = article.text()
   text = text
     .replace(/<[^>]+>/g, '') // Remove HTML
-    .replace(/\s+/g, ' ') // Remove Whitespace
+    // .replace(/\s+/g, ' ') // Remove Whitespace
+    .replace(/[ \t]+/g, ' ') // Replace multiple spaces and tabs with a single space
+    .replace(/\n\s*\n/g, '\n') // Replace multiple newlines with a single newline
     .trim()
+
+  text = text
+    .split('\n')
+    .map((line) => line.trim())
+    .join('\n')
+
   return text
 }

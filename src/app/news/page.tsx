@@ -37,17 +37,15 @@ export default async function Page() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <>{item.content}</>
+                  <p>
+                    <strong>{item.contentSnippet}</strong>
+                  </p>
+                  <p className="whitespace-pre-wrap">{item.content}</p>
                 </CardContent>
               </Card>
             </Fragment>
           )
         })}
-        <Card>
-          <CardHeader>
-            <CardTitle></CardTitle>
-          </CardHeader>
-        </Card>
       </div>
       <pre className="overflow-x-auto">{JSON.stringify(feed, null, 2)}</pre>
     </>
