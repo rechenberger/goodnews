@@ -39,3 +39,12 @@ export default async function Page({ params }: { params: { guid: string } }) {
     </>
   )
 }
+
+export async function generateStaticParams() {
+  const feed = await fetchGoodNews({
+    url: process.env.DEFAULT_RSS_FEED_URL!,
+  })
+  return feed.map((item) => ({
+    guid: item.guid,
+  }))
+}
