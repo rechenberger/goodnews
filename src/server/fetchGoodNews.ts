@@ -8,6 +8,8 @@ const GoodNewsItem = z.object({
   content: z.string(),
 })
 
+export type GoodNewsItem = z.infer<typeof GoodNewsItem>
+
 export const fetchGoodNews = async ({ url }: { url: string }) => {
   let items = await fetchFeedWithContent({ url })
 

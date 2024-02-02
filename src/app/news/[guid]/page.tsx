@@ -4,6 +4,8 @@ import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
+import { TextToSpeech } from './TextToSpeech'
 
 export { revalidate } from '@/server/revalidate'
 
@@ -49,9 +51,18 @@ export default async function Page({ params }: PageProps) {
           className="w-full "
         />
         <h1 className="mt-8 text-3xl">{item.title}</h1>
-        <div className="mb-8">
+        <div className="mb-4">
           <LocalDateTime datetime={item.isoDate} />
         </div>
+        <Suspense
+          fallback={
+            <div className="animate-pulse rounded-full bg-muted h-[54px] mb-4 text-opacity-50 flex items-center justify-center">
+              Generating audio...
+            </div>
+          }
+        >
+          <TextToSpeech item={item} />
+        </Suspense>
         <p>
           <strong>{item.contentSnippet}</strong>
         </p>
