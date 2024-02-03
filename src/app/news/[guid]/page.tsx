@@ -9,6 +9,8 @@ import { TextToSpeech } from './TextToSpeech'
 
 export { revalidate } from '@/server/revalidate'
 
+const ENABLE_TEXT_TO_SPEECH = false
+
 type PageProps = { params: { guid: string } }
 
 export const generateMetadata = async (
@@ -54,15 +56,17 @@ export default async function Page({ params }: PageProps) {
         <div className="mb-4">
           <LocalDateTime datetime={item.isoDate} />
         </div>
-        <Suspense
-          fallback={
-            <div className="animate-pulse rounded-full bg-muted h-[54px] mb-4 text-opacity-50 flex items-center justify-center">
-              Generating audio...
-            </div>
-          }
-        >
-          <TextToSpeech item={item} />
-        </Suspense>
+        {ENABLE_TEXT_TO_SPEECH && (
+          <Suspense
+            fallback={
+              <div className="animate-pulse rounded-full bg-muted h-[54px] mb-4 text-opacity-50 flex items-center justify-center">
+                Generating audio...
+              </div>
+            }
+          >
+            <TextToSpeech item={item} />
+          </Suspense>
+        )}
         <p>
           <strong>{item.contentSnippet}</strong>
         </p>
