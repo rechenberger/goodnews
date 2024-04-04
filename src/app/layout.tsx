@@ -19,6 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://umami.teampilot.ai/pathfinder"
+          data-website-id="b81abcc7-e086-451f-a4ad-34f768477726"
+        ></script>
+      </head>
       <body className="bg-background min-h-[100svh] flex flex-col ">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <MainTop />
